@@ -85,6 +85,16 @@ app.get("/api/getDivisions", async (req: Request, res: Response) => {
   }
 });
 
+app.get("api/getStats", async (req: Request, res: Response) => {
+  try {
+    const response = await getStats();
+    res.json(response)
+  } catch (err: any) {
+    console.error("ERROR:", err.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+})
+
 let twitchToken: string | undefined;
 let tokenExpiration: Date | undefined;
 
