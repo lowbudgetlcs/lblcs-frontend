@@ -2,7 +2,13 @@ import express, { Request, Response } from "express";
 import axios from "axios";
 import cors from "cors";
 import { rateLimit } from "express-rate-limit";
-import { getDivisions, getPlayers, getStats, getTeams } from "./db/queries/select";
+import {
+  getDivisions,
+  getPerformances,
+  getPlayers,
+  getStats,
+  getTeams,
+} from "./db/queries/select";
 const app = express();
 const port = 8080;
 const clientSecret: string | undefined = process.env.CLIENT_SECRET;
@@ -88,12 +94,22 @@ app.get("/api/getDivisions", async (req: Request, res: Response) => {
 app.get("api/getStats", async (req: Request, res: Response) => {
   try {
     const response = await getStats();
-    res.json(response)
+    res.json(response);
   } catch (err: any) {
     console.error("ERROR:", err.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
-})
+});
+
+app.get("api/getPerformances", async (req: Request, res: Response) => {
+  try {
+    const response = await getPerformances();
+    res.json(response);
+  } catch (err: any) {
+    console.error("ERROR:", err.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 let twitchToken: string | undefined;
 let tokenExpiration: Date | undefined;
