@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import axios from "axios";
 import cors from "cors";
 import { rateLimit } from "express-rate-limit";
-import { getDivisions, getPlayers, getTeams } from "./db/queries/select";
+import { getDivisions, getPlayers, getStats, getTeams } from "./db/queries/select";
 const app = express();
 const port = 8080;
 const clientSecret: string | undefined = process.env.CLIENT_SECRET;
