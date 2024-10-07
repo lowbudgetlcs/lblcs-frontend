@@ -77,11 +77,12 @@ export const useFetchData = () => {
     const fetchData = async () => {
       try {
         const [playersResponse, teamsResponse, divisionsResponse, statsResponse, performancesResponse] = await Promise.all([
-          fetch(import.meta.env.VITE_PLAYERS_URL as string),
-          fetch(import.meta.env.VITE_TEAMS_URL as string),
-          fetch(import.meta.env.VITE_DIVISIONS_URL as string),
-          fetch(import.meta.env.VITE_STATS_URL as string),
-          fetch(import.meta.env.VITE_PERFORMANCES_URL as string),
+          fetch("https://backend.lowbudgetlcs.com/api/getPlayers"),
+          fetch("https://backend.lowbudgetlcs.com/api/getTeams"),
+          fetch("https://backend.lowbudgetlcs.com/api/getDivisions"),
+          fetch("https://backend.lowbudgetlcs.com/api/getStats"),
+          fetch("https://backend.lowbudgetlcs.com/api/getPerformances"),
+
         ]);
 
         if (!playersResponse.ok || !teamsResponse.ok || !divisionsResponse.ok || !statsResponse.ok || !performancesResponse.ok) {
